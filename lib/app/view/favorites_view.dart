@@ -10,6 +10,11 @@ class FavoritesView extends StatefulWidget {
 class _FavoritesViewState extends State<FavoritesView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        Text('My Favorites'),
+        Expanded(child: ListView(children: [Text('Item1'), Text('Item2')],))
+      ],
+    );
   }
 }

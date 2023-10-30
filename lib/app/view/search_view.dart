@@ -13,8 +13,16 @@ class _SearchViewState extends State<SearchView> {
     return Column(
       children: [
         Text('Search'),
-        SearchBar(),
-        ElevatedButton(onPressed: () {}, child: Text('Search')),
+        Row(
+          children: [
+            Expanded(child: SizedBox(child: TextField())),
+            ElevatedButton(onPressed: () {}, child: Text('Search'))
+          ],
+        ),
+        Expanded(
+            child: ListView(
+          children: [Text('Item1'), Text('Item2')],
+        ))
       ],
     );
   }
