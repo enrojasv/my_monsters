@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_monsters/app/view/components/pokemon_preview_item.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -12,15 +13,18 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Search'),
+        const Text('Search'),
         Row(
           children: [
-            Expanded(child: SizedBox(child: TextField())),
-            ElevatedButton(onPressed: () {}, child: Text('Search'))
+            const Expanded(child: SizedBox(child: TextField())),
+            ElevatedButton(onPressed: () {}, child: const Text('Search'))
           ],
         ),
         Expanded(
-            child: ListView(
+            child: ListView.separated(
+          itemBuilder: (_, index) => const PokemonPreviewItem(),
+          separatorBuilder: (_, __) => const SizedBox(height: 0),
+          itemCount: 9,
         ))
       ],
     );
