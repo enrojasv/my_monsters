@@ -21,7 +21,6 @@ class _SearchViewState extends State<SearchView> {
         ),
         Expanded(
             child: ListView(
-          children: [Text('Item1'), Text('Item2')],
         ))
       ],
     );
