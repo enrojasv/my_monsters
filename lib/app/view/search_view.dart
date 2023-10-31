@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_monsters/app/repository/pokemon_preview_repository.dart';
 import 'package:my_monsters/app/view/components/pokemon_preview_item.dart';
 
 class SearchView extends StatefulWidget {
@@ -9,8 +10,12 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+
   @override
   Widget build(BuildContext context) {
+  var pokemonPreviewRepository = PokemonPreviewRepository();
+  var pokemonData = pokemonPreviewRepository.getMockData();
+
     return Column(
       children: [
         const Text('Search'),
@@ -22,9 +27,13 @@ class _SearchViewState extends State<SearchView> {
         ),
         Expanded(
             child: ListView.separated(
-          itemBuilder: (_, index) => const PokemonPreviewItem(),
+          itemBuilder: (_, index) {
+            var pokemonPreviewModel = pokemonData[index];
+
+            return PokemonPreviewItem(pokemonPreviewModel: pokemonPreviewModel);
+          },
           separatorBuilder: (_, __) => const SizedBox(height: 0),
-          itemCount: 9,
+          itemCount: pokemonData.length,
         ))
       ],
     );
