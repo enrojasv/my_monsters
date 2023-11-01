@@ -11,6 +11,12 @@ class PokemonPreviewRepository {
           image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"),
       PokemonPreviewModel.initData(name: "Squirtle", pokedex: "007",
           image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"),
+      PokemonPreviewModel.initData(name: "Mewtwo", pokedex: "150",
+          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"),
+      PokemonPreviewModel.initData(name: "Mew", pokedex: "007",
+          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png"),
+      PokemonPreviewModel.initData(name: "Porygon", pokedex: "137",
+          image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png"),
     ];
     return growableList;
   }
