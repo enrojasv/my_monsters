@@ -14,7 +14,7 @@ class DetailsView extends StatelessWidget {
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var styleDescription = theme.textTheme.bodyLarge!.copyWith();
 
-    var pokemonFavorite = false;
+    bool pokemonFavorite = false;
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(

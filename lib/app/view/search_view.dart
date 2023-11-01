@@ -16,34 +16,40 @@ class _SearchViewState extends State<SearchView> {
     var pokemonPreviewRepository = PokemonPreviewRepository();
     var pokemonData = pokemonPreviewRepository.getMockData();
 
-    return Column(
-      children: [
-        const Text('Search'),
-        Row(
-          children: [
-            const Expanded(child: SizedBox(child: TextField())),
-            ElevatedButton(onPressed: () {}, child: const Text('Search'))
-          ],
-        ),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DetailsView()),
-              );
-            },
-            child: Text("Details")),
-        Expanded(
-            child: ListView.separated(
-          itemBuilder: (_, index) {
-            var pokemonPreviewModel = pokemonData[index];
+    var theme = Theme.of(context);
 
-            return PokemonPreviewItem(pokemonPreviewModel: pokemonPreviewModel);
-          },
-          separatorBuilder: (_, __) => const SizedBox(height: 0),
-          itemCount: pokemonData.length,
-        ))
-      ],
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Column(
+        children: [
+          const Text('Search'),
+          Row(
+            children: [
+              const Expanded(child: SizedBox(child: TextField())),
+              ElevatedButton(onPressed: () {}, child: const Text('Search'))
+            ],
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailsView()),
+                );
+              },
+              child: Text("Details")),
+          Expanded(
+              child: ListView.separated(
+            itemBuilder: (_, index) {
+              var pokemonPreviewModel = pokemonData[index];
+
+              return PokemonPreviewItem(pokemonPreviewModel: pokemonPreviewModel);
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: 0),
+            itemCount: pokemonData.length,
+          ))
+        ],
+      ),
     );
   }
 }

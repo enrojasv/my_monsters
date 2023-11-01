@@ -9,18 +9,24 @@ class PokemonPreviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    var styleName =
+        theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
+    var stylePokedex = theme.textTheme.bodyLarge!.copyWith();
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16)),
-        CachedNetworkImage(
-            imageUrl:
-                pokemonPreviewModel.image),
+        CachedNetworkImage(imageUrl: pokemonPreviewModel.image),
         const SizedBox(width: 8),
-         Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text(pokemonPreviewModel.name), Text(pokemonPreviewModel.pokedex)],
+          children: [
+            Text(pokemonPreviewModel.name, style: styleName),
+            Text("Pokédex #${pokemonPreviewModel.pokedex}", style: stylePokedex)
+          ],
         )
       ],
     );

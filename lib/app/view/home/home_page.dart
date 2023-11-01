@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectedIndex = 0;
-  var navigationColor = Colors.blue;
+  var navigationColor = Colors.white;
 
   @override
   Widget build(BuildContext context) {
