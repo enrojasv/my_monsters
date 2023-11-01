@@ -28,7 +28,9 @@ class _SearchViewState extends State<SearchView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Search', style: styleTitle),
-          SizedBox(height: 16,),
+          SizedBox(
+            height: 16,
+          ),
           Row(
             children: [
               const Expanded(child: SizedBox(child: TextField())),
@@ -37,7 +39,9 @@ class _SearchViewState extends State<SearchView> {
                   onPressed: () {}, child: Icon(Icons.search_rounded))
             ],
           ),
-          SizedBox(height: 32,),
+          SizedBox(
+            height: 32,
+          ),
           Expanded(
               child: ListView.separated(
             itemBuilder: (_, index) {
@@ -50,14 +54,6 @@ class _SearchViewState extends State<SearchView> {
                 Divider(indent: dividerIntent, endIndent: dividerIntent),
             itemCount: pokemonData.length,
           )),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailsView()),
-                );
-              },
-              child: Text("Details")),
         ],
       ),
     );

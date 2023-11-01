@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_monsters/app/model/pokemon_preview_model.dart';
+import 'package:my_monsters/app/view/details_view.dart';
 
 class PokemonPreviewItem extends StatelessWidget {
   const PokemonPreviewItem({super.key, required this.pokemonPreviewModel});
@@ -14,21 +15,30 @@ class PokemonPreviewItem extends StatelessWidget {
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var stylePokedex = theme.textTheme.bodyLarge!.copyWith();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16)),
-        CachedNetworkImage(imageUrl: pokemonPreviewModel.image),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(pokemonPreviewModel.name, style: styleName),
-            Text("Pokédex #${pokemonPreviewModel.pokedex}", style: stylePokedex)
-          ],
-        )
-      ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailsView()),
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16)),
+          CachedNetworkImage(imageUrl: pokemonPreviewModel.image),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(pokemonPreviewModel.name, style: styleName),
+              Text("Pokédex #${pokemonPreviewModel.pokedex}",
+                  style: stylePokedex)
+            ],
+          )
+        ],
+      ),
     );
   }
 }
