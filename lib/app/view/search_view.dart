@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_monsters/app/repository/pokemon_preview_repository.dart';
 import 'package:my_monsters/app/view/components/pokemon_preview_item.dart';
+import 'package:my_monsters/app/view/details_view.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -10,11 +11,10 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-
   @override
   Widget build(BuildContext context) {
-  var pokemonPreviewRepository = PokemonPreviewRepository();
-  var pokemonData = pokemonPreviewRepository.getMockData();
+    var pokemonPreviewRepository = PokemonPreviewRepository();
+    var pokemonData = pokemonPreviewRepository.getMockData();
 
     return Column(
       children: [
@@ -25,6 +25,14 @@ class _SearchViewState extends State<SearchView> {
             ElevatedButton(onPressed: () {}, child: const Text('Search'))
           ],
         ),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DetailsView()),
+              );
+            },
+            child: Text("Details")),
         Expanded(
             child: ListView.separated(
           itemBuilder: (_, index) {
