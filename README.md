@@ -1,6 +1,6 @@
 # my_monsters
 
-Get the info about the monsters, hunter!
+Get the info about the monsters, trainer!
 
 ## Getting Started
 
