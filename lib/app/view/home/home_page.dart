@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectedIndex = 0;
-  var navigationColor = Colors.white;
+  var navigationColor = Colors.white70;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               NavigationDestination(
                   icon: Icon(Icons.search_rounded), label: 'Search'),
               NavigationDestination(
-                  icon: Icon(Icons.favorite_rounded), label: 'Favorites'),
+                  icon: Icon(Icons.favorite_border_rounded), label: 'Favorites'),
             ],
             selectedIndex: selectedIndex,
             onDestinationSelected: (value) {

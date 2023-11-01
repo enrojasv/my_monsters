@@ -17,19 +17,31 @@ class _SearchViewState extends State<SearchView> {
     var pokemonData = pokemonPreviewRepository.getMockData();
 
     var theme = Theme.of(context);
-
+    var styleTitle = theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-      child: Column(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Search'),
+          Text('Search', style: styleTitle),
           Row(
             children: [
               const Expanded(child: SizedBox(child: TextField())),
-              ElevatedButton(onPressed: () {}, child: const Text('Search'))
+              SizedBox(width: 16),
+              ElevatedButton(onPressed: () {}, child: Icon(Icons.search_rounded))
             ],
           ),
+          Expanded(
+              child: ListView.separated(
+            itemBuilder: (_, index) {
+              var pokemonPreviewModel = pokemonData[index];
+
+              return PokemonPreviewItem(
+                  pokemonPreviewModel: pokemonPreviewModel);
+            },
+            separatorBuilder: (_, __) => const SizedBox(height: 0),
+            itemCount: pokemonData.length,
+          )),
           ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -38,16 +50,6 @@ class _SearchViewState extends State<SearchView> {
                 );
               },
               child: Text("Details")),
-          Expanded(
-              child: ListView.separated(
-            itemBuilder: (_, index) {
-              var pokemonPreviewModel = pokemonData[index];
-
-              return PokemonPreviewItem(pokemonPreviewModel: pokemonPreviewModel);
-            },
-            separatorBuilder: (_, __) => const SizedBox(height: 0),
-            itemCount: pokemonData.length,
-          ))
         ],
       ),
     );
