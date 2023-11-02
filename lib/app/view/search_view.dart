@@ -16,6 +16,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     var pokemonPreviewRepository = PokemonPreviewRepository();
+    var originalPokemonData = pokemonPreviewRepository.getMockData();
     var pokemonData = pokemonPreviewRepository.getMockData();
     // var pokemonFilteredData = [];
 
@@ -29,8 +30,6 @@ class _SearchViewState extends State<SearchView> {
     var sizedBoxMedium = 16.0;
     var sizedBoxLarge = 32.0;
     var textSearch = "Search";
-
-    getFilteredListByName(pokemonData, " a ");
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -50,16 +49,10 @@ class _SearchViewState extends State<SearchView> {
               SizedBox(width: sizedBoxMedium),
               ElevatedButton(
                   onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          // Retrieve the text that the user has entered by using the
-                          // TextEditingController.
-                          content: Text(searchController.text),
-                        );
-                      },
-                    );
+                    setState(() {
+                      pokemonData = getFilteredListByName(
+                          originalPokemonData, searchController.text);
+                    });
                   },
                   child: const Icon(Icons.search_rounded))
             ],
@@ -83,8 +76,7 @@ class _SearchViewState extends State<SearchView> {
 
   List<PokemonPreviewModel> getFilteredListByName(
       List<PokemonPreviewModel> originalPokemonList, String nameToFilter) {
-
-    var cleanNameToFilter= nameToFilter.toLowerCase().trim();
+    var cleanNameToFilter = nameToFilter.toLowerCase().trim();
 
     List<PokemonPreviewModel> filteredList = [];
     filteredList.addAll(originalPokemonList);
