@@ -2,7 +2,7 @@ import '../model/pokemon_preview_model.dart';
 
 class PokemonPreviewRepository {
   List<PokemonPreviewModel> getMockData() {
-    final growableList = <PokemonPreviewModel>[
+    final pokemonList = <PokemonPreviewModel>[
       PokemonPreviewModel.initData(name: "Ditto", pokedex: "132",
           image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"),
       PokemonPreviewModel.initData(name: "Bulbasaur", pokedex: "001",
@@ -18,6 +18,6 @@ class PokemonPreviewRepository {
       PokemonPreviewModel.initData(name: "Porygon", pokedex: "137",
           image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png"),
     ];
-    return growableList;
+    return pokemonList;
   }
 }
