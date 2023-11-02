@@ -30,6 +30,8 @@ class _SearchViewState extends State<SearchView> {
     var sizedBoxLarge = 32.0;
     var textSearch = "Search";
 
+    getFilteredListByName(pokemonData, " a ");
+
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: paddingHorizontal, vertical: paddingVertical),

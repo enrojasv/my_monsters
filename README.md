@@ -15,4 +15,6 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-TODO - known issuses: manage app with no connection scenarios
+TODO - known issues: manage app with no connection scenarios
+TODO - known issues: introduce pagination to manage large pokemon lists (currently supporting only 
+the original 151 without pagination)
