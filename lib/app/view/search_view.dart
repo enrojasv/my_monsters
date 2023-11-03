@@ -28,7 +28,7 @@ class _SearchViewState extends State<SearchView> {
   void _runFilter(String enteredKeyword) {
     List<PokemonPreviewModel> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
+      // if the search field is empty or only contains white-space, we'll display all Pokemon
       results = _allPokemon;
     } else {
       results = _allPokemon
@@ -36,7 +36,6 @@ class _SearchViewState extends State<SearchView> {
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase().trim()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
     }
 
     // Refresh the UI
