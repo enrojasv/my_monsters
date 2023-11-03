@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:my_monsters/app/model/pokemon_preview_model.dart';
+import 'package:my_monsters/app/model/pokemon_model.dart';
 import 'package:my_monsters/app/view/details_view.dart';
 
 class PokemonPreviewItem extends StatelessWidget {
-  const PokemonPreviewItem({super.key, required this.pokemonPreviewModel});
+  const PokemonPreviewItem({super.key, required this.pokemonModel});
 
-  final PokemonPreviewModel pokemonPreviewModel;
+  final PokemonModel pokemonModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,13 @@ class PokemonPreviewItem extends StatelessWidget {
         children: [
           const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16)),
-          CachedNetworkImage(imageUrl: pokemonPreviewModel.image),
+          CachedNetworkImage(imageUrl: pokemonModel.imageFront),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(pokemonPreviewModel.name, style: styleName),
-              Text(textPokedex + pokemonPreviewModel.pokedex,
+              Text(pokemonModel.name, style: styleName),
+              Text(textPokedex + pokemonModel.pokedex,
                   style: stylePokedex)
             ],
           )

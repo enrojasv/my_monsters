@@ -1,4 +1,4 @@
-class PokemonDetailsModel {
+class PokemonModel {
   String name = "";
   String pokedex = "";
   String imageFront = "";
@@ -8,7 +8,7 @@ class PokemonDetailsModel {
   String type2 = "";
   String description = "";
 
-  PokemonDetailsModel.initData(
+  PokemonModel.initData(
       {required this.name,
       required this.pokedex,
       required this.imageFront,

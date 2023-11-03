@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_monsters/app/model/pokemon_preview_model.dart';
-import 'package:my_monsters/app/repository/pokemon_preview_repository.dart';
+import 'package:my_monsters/app/model/pokemon_model.dart';
+import 'package:my_monsters/app/repository/pokemon_repository.dart';
 import 'package:my_monsters/app/view/components/pokemon_preview_item.dart';
 
 class SearchView extends StatefulWidget {
@@ -12,21 +12,21 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   final searchController = TextEditingController();
-  late List<PokemonPreviewModel> _allPokemon = [];
-  List<PokemonPreviewModel> _foundPokemon = [];
+  late List<PokemonModel> _allPokemon = [];
+  List<PokemonModel> _foundPokemon = [];
 
   @override
   void initState() {
     // at the beginning, all Pokemon are shown
-    var pokemonPreviewRepository = PokemonPreviewRepository();
-    _allPokemon = pokemonPreviewRepository.getMockData();
+    var pokemonRepository = PokemonRepository();
+    _allPokemon = pokemonRepository.getMockData();
     _foundPokemon = _allPokemon;
     super.initState();
   }
 
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
-    List<PokemonPreviewModel> results = [];
+    List<PokemonModel> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all Pokemon
       results = _allPokemon;
@@ -77,9 +77,9 @@ class _SearchViewState extends State<SearchView> {
           Expanded(
               child: ListView.separated(
             itemBuilder: (_, index) {
-              var pokemonPreviewModel = _foundPokemon[index];
+              var pokemonModel = _foundPokemon[index];
               return PokemonPreviewItem(
-                  pokemonPreviewModel: pokemonPreviewModel);
+                  pokemonModel: pokemonModel);
             },
             separatorBuilder: (_, __) =>
                 Divider(indent: dividerIntent, endIndent: dividerIntent),

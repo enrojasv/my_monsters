@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../repository/pokemon_preview_repository.dart';
+import '../repository/pokemon_repository.dart';
 import 'components/pokemon_preview_item.dart';
 
 class FavoritesView extends StatefulWidget {
@@ -13,8 +13,8 @@ class FavoritesView extends StatefulWidget {
 class _FavoritesViewState extends State<FavoritesView> {
   @override
   Widget build(BuildContext context) {
-    var pokemonPreviewRepository = PokemonPreviewRepository();
-    var pokemonData = pokemonPreviewRepository.getMockData();
+    var pokemonRepository = PokemonRepository();
+    var pokemonData = pokemonRepository.getMockData();
 
     var theme = Theme.of(context);
     var styleTitle =
@@ -23,8 +23,7 @@ class _FavoritesViewState extends State<FavoritesView> {
     var dividerIntent = 40.0;
     var paddingHorizontal = 24.0;
     var paddingVertical = 8.0;
-    var sizedBoxMedium = 16.0;
-    var sizedBoxLarge = 32.0;
+    var sizedBoxDimension = 32.0;
     var textFavorites = "My Favorites";
 
     return Padding(
@@ -34,14 +33,14 @@ class _FavoritesViewState extends State<FavoritesView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(textFavorites, style: styleTitle),
-          SizedBox(height: sizedBoxLarge),
+          SizedBox(height: sizedBoxDimension),
           Expanded(
               child: ListView.separated(
                 itemBuilder: (_, index) {
-                  var pokemonPreviewModel = pokemonData[index];
+                  var pokemonModel = pokemonData[index];
 
                   return PokemonPreviewItem(
-                      pokemonPreviewModel: pokemonPreviewModel);
+                      pokemonModel: pokemonModel);
                 },
                 separatorBuilder: (_, __) =>
                     Divider(indent: dividerIntent, endIndent: dividerIntent),
