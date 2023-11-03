@@ -8,9 +8,9 @@ class PokemonModel {
   String type1 = "";
   String type2 = "";
   String description = "";
-  bool favorite = false;
   int height = 0;
   int weight = 0;
+  bool favorite = false;
 
   PokemonModel.initData({
       required this.name,
@@ -22,7 +22,8 @@ class PokemonModel {
       required this.type1,
       required this.type2,
       required this.description,
-      required this.favorite,
       required this.height,
-      required this.weight});
+      required this.weight,
+      required this.favorite,
+  });
 }
