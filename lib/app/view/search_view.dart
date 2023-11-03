@@ -12,14 +12,41 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   final searchController = TextEditingController();
+  late List<PokemonPreviewModel> _allPokemon = [];
+  List<PokemonPreviewModel> _foundPokemon = [];
+
+  @override
+  void initState() {
+    // at the beginning, all Pokemon are shown
+    var pokemonPreviewRepository = PokemonPreviewRepository();
+    _allPokemon = pokemonPreviewRepository.getMockData();
+    _foundPokemon = _allPokemon;
+    super.initState();
+  }
+
+  // This function is called whenever the text field changes
+  void _runFilter(String enteredKeyword) {
+    List<PokemonPreviewModel> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = _allPokemon;
+    } else {
+      results = _allPokemon
+          .where((element) => element.name
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase().trim()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    // Refresh the UI
+    setState(() {
+      _foundPokemon = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    var pokemonPreviewRepository = PokemonPreviewRepository();
-    var originalPokemonData = pokemonPreviewRepository.getMockData();
-    var pokemonData = pokemonPreviewRepository.getMockData();
-    // var pokemonFilteredData = [];
-
     var theme = Theme.of(context);
     var styleTitle =
         theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
@@ -39,59 +66,28 @@ class _SearchViewState extends State<SearchView> {
         children: [
           Text(textSearch, style: styleTitle),
           SizedBox(height: sizedBoxMedium),
-          Row(
-            children: [
-              Expanded(
-                  child: SizedBox(
-                      child: TextField(
-                controller: searchController,
-              ))),
-              SizedBox(width: sizedBoxMedium),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      pokemonData = getFilteredListByName(
-                          originalPokemonData, searchController.text);
-                    });
-                  },
-                  child: const Icon(Icons.search_rounded))
-            ],
-          ),
+          Row(children: [
+            Expanded(
+                child: SizedBox(
+                    child: TextField(
+              onChanged: (value) => _runFilter(value),
+            ))),
+            SizedBox(width: sizedBoxMedium)
+          ]),
           SizedBox(height: sizedBoxLarge),
           Expanded(
               child: ListView.separated(
             itemBuilder: (_, index) {
-              var pokemonPreviewModel = pokemonData[index];
+              var pokemonPreviewModel = _foundPokemon[index];
               return PokemonPreviewItem(
                   pokemonPreviewModel: pokemonPreviewModel);
             },
             separatorBuilder: (_, __) =>
                 Divider(indent: dividerIntent, endIndent: dividerIntent),
-            itemCount: pokemonData.length,
+            itemCount: _foundPokemon.length,
           )),
         ],
       ),
     );
-  }
-
-  List<PokemonPreviewModel> getFilteredListByName(
-      List<PokemonPreviewModel> originalPokemonList, String nameToFilter) {
-    var cleanNameToFilter = nameToFilter.toLowerCase().trim();
-
-    List<PokemonPreviewModel> filteredList = [];
-    filteredList.addAll(originalPokemonList);
-
-    filteredList.retainWhere((element) {
-      return element.name.toLowerCase().contains(cleanNameToFilter);
-    });
-
-    return filteredList;
-  }
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    searchController.dispose();
-    super.dispose();
   }
 }
