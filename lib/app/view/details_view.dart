@@ -2,9 +2,33 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailsView extends StatefulWidget {
-  final String name;
+  String name = "";
+  String pokedex = "";
+  String imageFront = "";
+  String imageBack = "";
+  String imageFrontShiny = "";
+  String imageBackShiny = "";
+  String type1 = "";
+  String type2 = "";
+  String description = "";
+  int height = 0;
+  int weight = 0;
+  bool favorite = false;
 
-  const DetailsView({super.key, required this.name});
+  DetailsView(
+      {super.key,
+      required this.name,
+      required this.pokedex,
+      required this.imageFront,
+      required this.imageBack,
+      required this.imageFrontShiny,
+      required this.imageBackShiny,
+      required this.type1,
+      required this.type2,
+      required this.description,
+      required this.height,
+      required this.weight,
+      required this.favorite});
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -25,10 +49,13 @@ class _DetailsViewState extends State<DetailsView> {
     var pokemonFavoriteText = "Nope";
     var sizedBoxSmall = 8.0;
     var sizedBoxLarge = 32.0;
+    var textPokedex = "#";
     var textType1 = "Type 1: ";
     var textType2 = "Type 2: ";
     var textHeight = "Height: ";
+    var textHeightMeasurementUnit = " decimetres";
     var textWeight = "Weight: ";
+    var textWeightMeasurementUnit = " hectograms";
     var textDescription = "Description: ";
     var textShiny = "Shiny Variants";
 
@@ -40,13 +67,11 @@ class _DetailsViewState extends State<DetailsView> {
               pokemonFavorite = false;
               pokemonFavoriteText = "nope";
             });
-
           } else {
             setState(() {
               pokemonFavorite = true;
               pokemonFavoriteText = "yes";
             });
-
           }
         },
         child: const Icon(Icons.favorite),
@@ -61,9 +86,7 @@ class _DetailsViewState extends State<DetailsView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CachedNetworkImage(
-                      imageUrl:
-                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png"),
+                  CachedNetworkImage(imageUrl: widget.imageBack),
                   Column(
                     children: [
                       Text(
@@ -71,54 +94,56 @@ class _DetailsViewState extends State<DetailsView> {
                         style: styleName,
                       ),
                       Text(
-                        "Pokédex #0001",
+                        textPokedex + widget.pokedex,
                         style: stylePokedex,
                       )
                     ],
                   ),
-                  CachedNetworkImage(
-                      imageUrl:
-                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
+                  CachedNetworkImage(imageUrl: widget.imageFront),
                 ],
               ),
               SizedBox(height: sizedBoxLarge),
               Row(
                 children: [
                   Text(textType1, style: styleIntro),
-                  Text("Grass", style: styleDescription),
+                  Text(widget.type1, style: styleDescription),
                   SizedBox(width: sizedBoxLarge),
                   Text(textType2, style: styleIntro),
-                  Text("Poison", style: styleDescription)
+                  Text(widget.type2, style: styleDescription)
                 ],
               ),
               SizedBox(height: sizedBoxSmall),
               Row(
                 children: [
                   Text(textHeight, style: styleIntro),
-                  Text("7 decimetres", style: styleDescription),
+                  Text(widget.height.toString() + textHeightMeasurementUnit,
+                      style: styleDescription),
                 ],
               ),
               SizedBox(height: sizedBoxSmall),
               Row(
                 children: [
                   Text(textWeight, style: styleIntro),
-                  Text("69 hectograms", style: styleDescription)
+                  Text(widget.weight.toString() + textWeightMeasurementUnit,
+                      style: styleDescription)
                 ],
               ),
               SizedBox(height: sizedBoxLarge),
               Text(textDescription, style: styleIntro),
               Text(
-                "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
+                widget.description,
                 style: styleDescription,
                 textAlign: TextAlign.justify,
               ),
               SizedBox(height: sizedBoxLarge),
-              Align(alignment: Alignment.center,child: Text(textShiny, style: styleIntro)),
-
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Align(
+                  alignment: Alignment.center,
+                  child: Text(textShiny, style: styleIntro)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CachedNetworkImage(imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png"),
-                  CachedNetworkImage(imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"),
+                  CachedNetworkImage(imageUrl: widget.imageBackShiny),
+                  CachedNetworkImage(imageUrl: widget.imageFrontShiny),
                 ],
               ),
               SizedBox(height: sizedBoxSmall),

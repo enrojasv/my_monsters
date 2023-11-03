@@ -15,13 +15,27 @@ class PokemonPreviewItem extends StatelessWidget {
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var stylePokedex = theme.textTheme.bodyLarge!.copyWith();
 
-    var textPokedex = "Pokédex #";
+    var textPokedex = "#";
 
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  DetailsView(name: pokemonModel.name)),
+          MaterialPageRoute(
+              builder: (context) => DetailsView(
+                    name: pokemonModel.name,
+                    pokedex: pokemonModel.pokedex,
+                    imageFront: pokemonModel.imageFront,
+                    imageBack: pokemonModel.imageBack,
+                    imageFrontShiny: pokemonModel.imageFrontShiny,
+                    imageBackShiny: pokemonModel.imageBackShiny,
+                    type1: pokemonModel.type1,
+                    type2: pokemonModel.type2,
+                    description: pokemonModel.description,
+                    height: pokemonModel.height,
+                    weight: pokemonModel.weight,
+                    favorite: pokemonModel.favorite,
+                  )),
         );
       },
       child: Row(
@@ -35,8 +49,7 @@ class PokemonPreviewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(pokemonModel.name, style: styleName),
-              Text(textPokedex + pokemonModel.pokedex,
-                  style: stylePokedex)
+              Text(textPokedex + pokemonModel.pokedex, style: stylePokedex)
             ],
           )
         ],
