@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailsView extends StatefulWidget {
-  const DetailsView({super.key});
+  final String name;
+
+  const DetailsView({super.key, required this.name});
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -65,7 +67,7 @@ class _DetailsViewState extends State<DetailsView> {
                   Column(
                     children: [
                       Text(
-                        "Bulbasaur",
+                        widget.name,
                         style: styleName,
                       ),
                       Text(

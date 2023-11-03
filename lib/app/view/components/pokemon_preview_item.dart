@@ -21,7 +21,7 @@ class PokemonPreviewItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const DetailsView()),
+          MaterialPageRoute(builder: (context) =>  DetailsView(name: pokemonModel.name)),
         );
       },
       child: Row(
