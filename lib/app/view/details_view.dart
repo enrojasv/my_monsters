@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/dimens.dart';
+import '../constants/strings.dart';
+
 class DetailsView extends StatefulWidget {
   String name = "";
   String pokedex = "";
@@ -30,8 +33,6 @@ class DetailsView extends StatefulWidget {
       required this.height,
       required this.weight,
       required this.favorite});
-
-
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -65,19 +66,8 @@ class _DetailsViewState extends State<DetailsView> {
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var styleDescription = theme.textTheme.bodyLarge!.copyWith();
 
-    var sizedBoxSmall = 8.0;
-    var sizedBoxLarge = 32.0;
     IconData iconFav = Icons.favorite_rounded;
     IconData iconNoFav = Icons.favorite_outline_rounded;
-    var textPokedex = "#";
-    var textType1 = "Type 1: ";
-    var textType2 = "Type 2: ";
-    var textHeight = "Height: ";
-    var textHeightMeasurementUnit = " decimetres";
-    var textWeight = "Weight: ";
-    var textWeightMeasurementUnit = " hectograms";
-    var textDescription = "Description: ";
-    var textShiny = "Shiny Variants";
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -100,7 +90,9 @@ class _DetailsViewState extends State<DetailsView> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          padding: const EdgeInsets.symmetric(
+              horizontal: Dimens.paddingHorizontal,
+              vertical: Dimens.paddingVertical),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -116,7 +108,7 @@ class _DetailsViewState extends State<DetailsView> {
                         style: styleName,
                       ),
                       Text(
-                        textPokedex + widget.pokedex,
+                        Strings.stringPokedex + widget.pokedex,
                         style: stylePokedex,
                       )
                     ],
@@ -124,43 +116,47 @@ class _DetailsViewState extends State<DetailsView> {
                   CachedNetworkImage(imageUrl: widget.imageFront),
                 ],
               ),
-              SizedBox(height: sizedBoxLarge),
+              const SizedBox(height: Dimens.sizedBoxLarge),
               Row(
                 children: [
-                  Text(textType1, style: styleIntro),
+                  Text(Strings.stringType1, style: styleIntro),
                   Text(widget.type1, style: styleDescription),
-                  SizedBox(width: sizedBoxLarge),
-                  Text(textType2, style: styleIntro),
+                  const SizedBox(width: Dimens.sizedBoxLarge),
+                  Text(Strings.stringType2, style: styleIntro),
                   Text(widget.type2, style: styleDescription)
                 ],
               ),
-              SizedBox(height: sizedBoxSmall),
+              const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
-                  Text(textHeight, style: styleIntro),
-                  Text(widget.height.toString() + textHeightMeasurementUnit,
+                  Text(Strings.stringHeight, style: styleIntro),
+                  Text(
+                      widget.height.toString() +
+                          Strings.stringHeightMeasurementUnit,
                       style: styleDescription),
                 ],
               ),
-              SizedBox(height: sizedBoxSmall),
+              const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
-                  Text(textWeight, style: styleIntro),
-                  Text(widget.weight.toString() + textWeightMeasurementUnit,
+                  Text(Strings.stringWeight, style: styleIntro),
+                  Text(
+                      widget.weight.toString() +
+                          Strings.stringWeightMeasurementUnit,
                       style: styleDescription)
                 ],
               ),
-              SizedBox(height: sizedBoxLarge),
-              Text(textDescription, style: styleIntro),
+              const SizedBox(height: Dimens.sizedBoxLarge),
+              Text(Strings.stringDescription, style: styleIntro),
               Text(
                 widget.description,
                 style: styleDescription,
                 textAlign: TextAlign.justify,
               ),
-              SizedBox(height: sizedBoxLarge),
+              const SizedBox(height: Dimens.sizedBoxLarge),
               Align(
                   alignment: Alignment.center,
-                  child: Text(textShiny, style: styleIntro)),
+                  child: Text(Strings.stringShiny, style: styleIntro)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -168,14 +164,14 @@ class _DetailsViewState extends State<DetailsView> {
                   CachedNetworkImage(imageUrl: widget.imageFrontShiny),
                 ],
               ),
-              SizedBox(height: sizedBoxSmall),
+              const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
                   Text("Favorite repository: ", style: styleIntro),
                   Text(widget.favorite.toString(), style: styleDescription)
                 ],
               ),
-              SizedBox(height: sizedBoxSmall),
+              const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
                   Text("Favorite preferences: ", style: styleIntro),

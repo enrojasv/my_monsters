@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_monsters/app/constants/dimens.dart';
 import 'package:my_monsters/app/model/pokemon_model.dart';
 import 'package:my_monsters/app/view/details_view.dart';
+
+import '../../constants/strings.dart';
 
 class PokemonPreviewItem extends StatelessWidget {
   const PokemonPreviewItem({super.key, required this.pokemonModel});
@@ -14,8 +17,6 @@ class PokemonPreviewItem extends StatelessWidget {
     var styleName =
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var stylePokedex = theme.textTheme.bodyLarge!.copyWith();
-
-    var textPokedex = "#";
 
     return GestureDetector(
       onTap: () {
@@ -42,14 +43,17 @@ class PokemonPreviewItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimens.paddingHorizontal,
+                  vertical: Dimens.paddingVertical)),
           CachedNetworkImage(imageUrl: pokemonModel.imageFront),
-          const SizedBox(width: 8),
+          const SizedBox(width: Dimens.sizedBoxSmall),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(pokemonModel.name, style: styleName),
-              Text(textPokedex + pokemonModel.pokedex, style: stylePokedex)
+              Text(Strings.stringPokedex + pokemonModel.pokedex,
+                  style: stylePokedex)
             ],
           )
         ],

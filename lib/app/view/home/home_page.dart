@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_monsters/app/view/favorites_view.dart';
 import 'package:my_monsters/app/view/search_view.dart';
 
+import '../../constants/dimens.dart';
+import '../../constants/strings.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,14 +20,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget page;
     switch (selectedIndex) {
-      case Constant.optionSearchView:
+      case Dimens.optionSearchView:
         page = const SearchView();
         break;
-      case Constant.optionFavoritesView:
+      case Dimens.optionFavoritesView:
         page = const FavoritesView();
         break;
       default:
-        throw UnimplementedError('no widget for $selectedIndex');
+        throw UnimplementedError(
+            Strings.stringNoWidgetFor + selectedIndex.toString());
     }
 
     return Scaffold(
@@ -35,16 +39,19 @@ class _HomePageState extends State<HomePage> {
               child: ColoredBox(
             color: navigationColor,
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
+              duration:
+                  const Duration(milliseconds: Dimens.durationMilliseconds),
               child: page,
             ),
           )),
           NavigationBar(
             destinations: const [
               NavigationDestination(
-                  icon: Icon(Icons.search_rounded), label: 'Search'),
+                  icon: Icon(Icons.search_rounded),
+                  label: Strings.stringSearch),
               NavigationDestination(
-                  icon: Icon(Icons.favorite_border_rounded), label: 'Favorites'),
+                  icon: Icon(Icons.favorite_border_rounded),
+                  label: Strings.stringFavorites),
             ],
             selectedIndex: selectedIndex,
             onDestinationSelected: (value) {
@@ -57,11 +64,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-class Constant {
-  Constant._();
-
-  static const optionSearchView = 0;
-  static const optionFavoritesView = 1;
 }

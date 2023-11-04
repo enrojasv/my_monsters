@@ -3,6 +3,9 @@ import 'package:my_monsters/app/model/pokemon_model.dart';
 import 'package:my_monsters/app/repository/pokemon_repository.dart';
 import 'package:my_monsters/app/view/components/pokemon_preview_item.dart';
 
+import '../constants/dimens.dart';
+import '../constants/strings.dart';
+
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
 
@@ -49,47 +52,37 @@ class _SearchViewState extends State<SearchView> {
     var styleTitle =
         theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
 
-    var dividerIntent = 40.0;
-    var paddingHorizontal = 24.0;
-    var paddingVertical = 8.0;
-    var sizedBoxMedium = 16.0;
-    var sizedBoxLarge = 32.0;
-    var textFieldBorderRadius = 20.0;
-    var textSearch = "Search";
-    var textHintPokemon = "Who's that Pokémon?";
-    var textHintSearch = "Search by name";
-
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: paddingHorizontal, vertical: paddingVertical),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Dimens.paddingHorizontal,
+          vertical: Dimens.paddingVertical),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(textSearch, style: styleTitle),
-          SizedBox(height: sizedBoxMedium),
+          Text(Strings.stringSearch, style: styleTitle),
+          const SizedBox(height: Dimens.sizedBoxMedium),
           Row(children: [
             Expanded(
                 child: SizedBox(
                     child: TextField(
               decoration: InputDecoration(
-                  hintText: textHintSearch,
+                  hintText: Strings.stringHintSearch,
                   border: OutlineInputBorder(
                       borderRadius:
-                          BorderRadius.circular(textFieldBorderRadius)),
-                  labelText: textHintPokemon),
+                          BorderRadius.circular(Dimens.textFieldBorderRadius)),
+                  labelText: Strings.stringHintPokemon),
               onChanged: (value) => _runFilter(value),
             ))),
-            SizedBox(width: sizedBoxMedium)
           ]),
-          SizedBox(height: sizedBoxLarge),
+          const SizedBox(height: Dimens.sizedBoxLarge),
           Expanded(
               child: ListView.separated(
             itemBuilder: (_, index) {
               var pokemonModel = _foundPokemon[index];
               return PokemonPreviewItem(pokemonModel: pokemonModel);
             },
-            separatorBuilder: (_, __) =>
-                Divider(indent: dividerIntent, endIndent: dividerIntent),
+            separatorBuilder: (_, __) => const Divider(
+                indent: Dimens.dividerIntent, endIndent: Dimens.dividerIntent),
             itemCount: _foundPokemon.length,
           )),
         ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/dimens.dart';
+import '../constants/strings.dart';
 import '../model/pokemon_model.dart';
 import '../repository/pokemon_repository.dart';
 import 'components/pokemon_preview_item.dart';
@@ -21,7 +23,6 @@ class _FavoritesViewState extends State<FavoritesView> {
     _allPokemon = pokemonRepository.getMockData();
     _favoritePokemon =
         _allPokemon.where((element) => element.favorite == true).toList();
-
     super.initState();
   }
 
@@ -31,20 +32,15 @@ class _FavoritesViewState extends State<FavoritesView> {
     var styleTitle =
         theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
 
-    var dividerIntent = 40.0;
-    var paddingHorizontal = 24.0;
-    var paddingVertical = 8.0;
-    var sizedBoxDimension = 32.0;
-    var textFavorites = "My Favorites";
-
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: paddingHorizontal, vertical: paddingVertical),
+      padding: const EdgeInsets.symmetric(
+          horizontal: Dimens.paddingHorizontal,
+          vertical: Dimens.paddingVertical),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(textFavorites, style: styleTitle),
-          SizedBox(height: sizedBoxDimension),
+          Text(Strings.stringMyFavorites, style: styleTitle),
+          const SizedBox(height: Dimens.sizedBoxLarge),
           Expanded(
               child: ListView.separated(
             itemBuilder: (_, index) {
@@ -52,8 +48,8 @@ class _FavoritesViewState extends State<FavoritesView> {
 
               return PokemonPreviewItem(pokemonModel: pokemonModel);
             },
-            separatorBuilder: (_, __) =>
-                Divider(indent: dividerIntent, endIndent: dividerIntent),
+            separatorBuilder: (_, __) => const Divider(
+                indent: Dimens.dividerIntent, endIndent: Dimens.dividerIntent),
             itemCount: _favoritePokemon.length,
           )),
         ],
