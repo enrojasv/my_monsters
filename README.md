@@ -3,6 +3,8 @@
 A Pokémon app that serves as a simplified Pokédex. It shows a list of Pokémon so you can search and click the one you like to see a more detailed view with extra information.
 There is a favorite feature that allows the user to set their favorites that are shown in the favorites view. It has data persistence, so the user can return to their favorites.
 
+![Screenshot](assets/docu/home.jpg)
+ 
 #### 🦖 **Search View** 🦖️
 
 This view shows the image, name, and Pokédex number of the Pokémon searched. The list refreshes in real-time as the user writes in the search bar.
