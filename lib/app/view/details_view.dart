@@ -45,10 +45,10 @@ class _DetailsViewState extends State<DetailsView> {
         theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold);
     var styleDescription = theme.textTheme.bodyLarge!.copyWith();
 
-    bool pokemonFavorite = false;
-    var pokemonFavoriteText = "Nope";
     var sizedBoxSmall = 8.0;
     var sizedBoxLarge = 32.0;
+    IconData iconFav = Icons.favorite_rounded;
+    IconData iconNoFav = Icons.favorite_outline_rounded;
     var textPokedex = "#";
     var textType1 = "Type 1: ";
     var textType2 = "Type 2: ";
@@ -62,19 +62,17 @@ class _DetailsViewState extends State<DetailsView> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (pokemonFavorite == true) {
+          if (widget.favorite == true) {
             setState(() {
-              pokemonFavorite = false;
-              pokemonFavoriteText = "nope";
+              widget.favorite = false;
             });
           } else {
             setState(() {
-              pokemonFavorite = true;
-              pokemonFavoriteText = "yes";
+              widget.favorite = true;
             });
           }
         },
-        child: const Icon(Icons.favorite),
+        child: Icon(widget.favorite ? iconFav : iconNoFav),
       ),
       body: SafeArea(
         child: Padding(
@@ -147,7 +145,12 @@ class _DetailsViewState extends State<DetailsView> {
                 ],
               ),
               SizedBox(height: sizedBoxSmall),
-              Text(pokemonFavoriteText),
+              Row(
+                children: [
+                  Text("Favorite: ", style: styleIntro),
+                  Text(widget.favorite.toString(), style: styleDescription)
+                ],
+              ),
             ],
           ),
         ),
