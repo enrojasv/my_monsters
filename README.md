@@ -1,20 +1,29 @@
-# my_monsters
+# Flutter App: My Monsters
 
-Get the info about the monsters, trainer!
+A Pokémon app that serves as a simplified Pokédex. It shows a list of Pokémon so you can search and click the one you like to see a more detailed view with extra information.
+There is a favorite feature that allows the user to set their favorites that are shown in the favorites view. It has data persistence, so the user can return to their favorites.
 
-## Getting Started
+#### 🦖 **Search View** 🦖️
 
-This project is a starting point for a Flutter application.
+This view shows the image, name, and Pokédex number of the Pokémon searched. The list refreshes in real-time as the user writes in the search bar.
 
-A few resources to get you started if this is your first Flutter project:
+#### 👁 **Details View** 👁
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+When the user clicks on a Pokémon, this view will be shown with more information about it. In this view the user will also find a button, clicking on it will "favorite" the Pokémon.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### ❤️ **Favorites** ❤️
 
-TODO - known issues: manage app with no connection scenarios
-TODO - known issues: introduce pagination to manage large pokemon lists (currently supporting only 
-the original 151 without pagination)
+Any Pokémon that has been marked as a favorite by the user will be shown here.
+
+#### 👆 **Tab Bar** 👆
+
+A tab bar to move between the search view and the favorite view.
+
+#### 🔜 **To Do** 🔜
+
+Known issues and functionalities that will come in the next version:
+
+- Known issue: Manage app in no connection scenarios.
+- Known issue: Introduce pagination to manage large Pokémon lists.
+- Feature: Show a message if the favorite view is empty.
+- Feature: Use the https://pokeapi.co/ to get the data of the Pokémon.
