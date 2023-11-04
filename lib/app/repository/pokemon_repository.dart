@@ -20,7 +20,7 @@ class PokemonRepository {
             "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
         height: 7,
         weight: 69,
-        favorite: false,
+        favorite: true,
       ),
       PokemonModel.initData(
         name: "Ivysaur",
@@ -77,7 +77,7 @@ class PokemonRepository {
             "It has a preference for hot things. When it rains, steam is said to spout from the tip of its tail.",
         height: 6,
         weight: 85,
-        favorite: false,
+        favorite: true,
       ),
       PokemonModel.initData(
         name: "Charmeleon",
@@ -134,7 +134,7 @@ class PokemonRepository {
             "When it retracts its long neck into its shell, it squirts out water with vigorous force.",
         height: 5,
         weight: 90,
-        favorite: false,
+        favorite: true,
       ),
       PokemonModel.initData(
         name: "Wartortle",

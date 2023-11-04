@@ -11,7 +11,6 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  final searchController = TextEditingController();
   late List<PokemonModel> _allPokemon = [];
   List<PokemonModel> _foundPokemon = [];
 
@@ -55,7 +54,10 @@ class _SearchViewState extends State<SearchView> {
     var paddingVertical = 8.0;
     var sizedBoxMedium = 16.0;
     var sizedBoxLarge = 32.0;
+    var textFieldBorderRadius = 20.0;
     var textSearch = "Search";
+    var textHintPokemon = "Who's that Pokémon?";
+    var textHintSearch = "Who's that Pokémon?";
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -69,6 +71,12 @@ class _SearchViewState extends State<SearchView> {
             Expanded(
                 child: SizedBox(
                     child: TextField(
+              decoration: InputDecoration(
+                  hintText: textHintSearch,
+                  border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(textFieldBorderRadius)),
+                  labelText: textHintPokemon),
               onChanged: (value) => _runFilter(value),
             ))),
             SizedBox(width: sizedBoxMedium)
@@ -78,8 +86,7 @@ class _SearchViewState extends State<SearchView> {
               child: ListView.separated(
             itemBuilder: (_, index) {
               var pokemonModel = _foundPokemon[index];
-              return PokemonPreviewItem(
-                  pokemonModel: pokemonModel);
+              return PokemonPreviewItem(pokemonModel: pokemonModel);
             },
             separatorBuilder: (_, __) =>
                 Divider(indent: dividerIntent, endIndent: dividerIntent),

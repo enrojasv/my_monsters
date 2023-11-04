@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../model/pokemon_model.dart';
 import '../repository/pokemon_repository.dart';
 import 'components/pokemon_preview_item.dart';
 
@@ -11,11 +12,19 @@ class FavoritesView extends StatefulWidget {
 }
 
 class _FavoritesViewState extends State<FavoritesView> {
+  late List<PokemonModel> _allPokemon = [];
+  List<PokemonModel> _favoritePokemon = [];
+
+  @override
+  void initState() {
+    var pokemonRepository = PokemonRepository();
+    _allPokemon = pokemonRepository.getMockData();
+    _favoritePokemon = _allPokemon.where((element) => element.favorite ==true).toList();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var pokemonRepository = PokemonRepository();
-    var pokemonData = pokemonRepository.getMockData();
-
     var theme = Theme.of(context);
     var styleTitle =
     theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
@@ -37,14 +46,14 @@ class _FavoritesViewState extends State<FavoritesView> {
           Expanded(
               child: ListView.separated(
                 itemBuilder: (_, index) {
-                  var pokemonModel = pokemonData[index];
+                  var pokemonModel = _favoritePokemon[index];
 
                   return PokemonPreviewItem(
                       pokemonModel: pokemonModel);
                 },
                 separatorBuilder: (_, __) =>
                     Divider(indent: dividerIntent, endIndent: dividerIntent),
-                itemCount: pokemonData.length,
+                itemCount: _favoritePokemon.length,
               )),
         ],
       ),
