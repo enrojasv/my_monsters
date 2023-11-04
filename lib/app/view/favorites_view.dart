@@ -19,7 +19,9 @@ class _FavoritesViewState extends State<FavoritesView> {
   void initState() {
     var pokemonRepository = PokemonRepository();
     _allPokemon = pokemonRepository.getMockData();
-    _favoritePokemon = _allPokemon.where((element) => element.favorite ==true).toList();
+    _favoritePokemon =
+        _allPokemon.where((element) => element.favorite == true).toList();
+
     super.initState();
   }
 
@@ -27,7 +29,7 @@ class _FavoritesViewState extends State<FavoritesView> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var styleTitle =
-    theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
+        theme.textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold);
 
     var dividerIntent = 40.0;
     var paddingHorizontal = 24.0;
@@ -45,16 +47,15 @@ class _FavoritesViewState extends State<FavoritesView> {
           SizedBox(height: sizedBoxDimension),
           Expanded(
               child: ListView.separated(
-                itemBuilder: (_, index) {
-                  var pokemonModel = _favoritePokemon[index];
+            itemBuilder: (_, index) {
+              var pokemonModel = _favoritePokemon[index];
 
-                  return PokemonPreviewItem(
-                      pokemonModel: pokemonModel);
-                },
-                separatorBuilder: (_, __) =>
-                    Divider(indent: dividerIntent, endIndent: dividerIntent),
-                itemCount: _favoritePokemon.length,
-              )),
+              return PokemonPreviewItem(pokemonModel: pokemonModel);
+            },
+            separatorBuilder: (_, __) =>
+                Divider(indent: dividerIntent, endIndent: dividerIntent),
+            itemCount: _favoritePokemon.length,
+          )),
         ],
       ),
     );

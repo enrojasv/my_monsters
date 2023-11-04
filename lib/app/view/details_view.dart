@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailsView extends StatefulWidget {
   String name = "";
@@ -30,11 +31,30 @@ class DetailsView extends StatefulWidget {
       required this.weight,
       required this.favorite});
 
+
+
   @override
   State<DetailsView> createState() => _DetailsViewState();
 }
 
 class _DetailsViewState extends State<DetailsView> {
+  bool favoriteShPr = false;
+
+  Future<void> _loadPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      favoriteShPr = (prefs.getBool('favorite') ?? false);
+    });
+  }
+
+  Future<void> _toggleFavorite() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      favoriteShPr = (prefs.getBool('favorite') ?? false);
+      prefs.setBool('favorite', !favoriteShPr);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -62,17 +82,21 @@ class _DetailsViewState extends State<DetailsView> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (widget.favorite == true) {
+          if (favoriteShPr == true) {
             setState(() {
+              _toggleFavorite();
+              _loadPreferences();
               widget.favorite = false;
             });
           } else {
             setState(() {
+              _toggleFavorite();
+              _loadPreferences();
               widget.favorite = true;
             });
           }
         },
-        child: Icon(widget.favorite ? iconFav : iconNoFav),
+        child: Icon(favoriteShPr ? iconFav : iconNoFav),
       ),
       body: SafeArea(
         child: Padding(
@@ -147,8 +171,15 @@ class _DetailsViewState extends State<DetailsView> {
               SizedBox(height: sizedBoxSmall),
               Row(
                 children: [
-                  Text("Favorite: ", style: styleIntro),
+                  Text("Favorite repository: ", style: styleIntro),
                   Text(widget.favorite.toString(), style: styleDescription)
+                ],
+              ),
+              SizedBox(height: sizedBoxSmall),
+              Row(
+                children: [
+                  Text("Favorite preferences: ", style: styleIntro),
+                  Text(favoriteShPr.toString(), style: styleDescription)
                 ],
               ),
             ],

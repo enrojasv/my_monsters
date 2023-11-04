@@ -57,7 +57,7 @@ class _SearchViewState extends State<SearchView> {
     var textFieldBorderRadius = 20.0;
     var textSearch = "Search";
     var textHintPokemon = "Who's that Pokémon?";
-    var textHintSearch = "Who's that Pokémon?";
+    var textHintSearch = "Search by name";
 
     return Padding(
       padding: EdgeInsets.symmetric(
