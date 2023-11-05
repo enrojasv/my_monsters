@@ -33,5 +33,4 @@ Known issues and functionalities that will come in the next version:
 
 - Known issue: Manage app in no connection scenarios.
 - Known issue: Introduce pagination to manage large Pokémon lists.
-- Feature: Show a message if the favorite view is empty.
 - Feature: Use the https://pokeapi.co/ to get the data of the Pokémon.
