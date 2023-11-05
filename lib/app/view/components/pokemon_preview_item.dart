@@ -51,7 +51,7 @@ class PokemonPreviewItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(pokemonModel.name, style: styleName),
-              Text(Strings.stringPokedex + pokemonModel.pokedex,
+              Text(Strings.pokedex + pokemonModel.pokedex,
                   style: stylePokedex)
             ],
           )

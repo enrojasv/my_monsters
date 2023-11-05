@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         break;
       default:
         throw UnimplementedError(
-            Strings.stringNoWidgetFor + selectedIndex.toString());
+            Strings.noWidgetFor + selectedIndex.toString());
     }
 
     return Scaffold(
@@ -48,10 +48,10 @@ class _HomePageState extends State<HomePage> {
             destinations: const [
               NavigationDestination(
                   icon: Icon(Icons.search_rounded),
-                  label: Strings.stringSearch),
+                  label: Strings.search),
               NavigationDestination(
                   icon: Icon(Icons.favorite_border_rounded),
-                  label: Strings.stringFavorites),
+                  label: Strings.favorites),
             ],
             selectedIndex: selectedIndex,
             onDestinationSelected: (value) {

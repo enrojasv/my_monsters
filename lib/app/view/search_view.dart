@@ -59,18 +59,18 @@ class _SearchViewState extends State<SearchView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(Strings.stringSearch, style: styleTitle),
+          Text(Strings.search, style: styleTitle),
           const SizedBox(height: Dimens.sizedBoxMedium),
           Row(children: [
             Expanded(
                 child: SizedBox(
                     child: TextField(
               decoration: InputDecoration(
-                  hintText: Strings.stringHintSearch,
+                  hintText: Strings.hintSearch,
                   border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(Dimens.textFieldBorderRadius)),
-                  labelText: Strings.stringHintPokemon),
+                  labelText: Strings.hintPokemon),
               onChanged: (value) => _runFilter(value),
             ))),
           ]),

@@ -29,7 +29,7 @@ class _FavoritesViewState extends State<FavoritesView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(Strings.stringMyFavorites, style: styleTitle),
+          Text(Strings.myFavorites, style: styleTitle),
           const SizedBox(height: Dimens.sizedBoxLarge),
           Expanded(
             child: FutureBuilder<List<PokemonModel>>(
@@ -42,7 +42,7 @@ class _FavoritesViewState extends State<FavoritesView> {
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(
-                    child: Text(Strings.stringNoFavorites),
+                    child: Text(Strings.noFavorites),
                   );
                 }
                 return ListView.separated(

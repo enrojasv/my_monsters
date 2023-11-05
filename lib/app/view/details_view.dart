@@ -97,7 +97,7 @@ class _DetailsViewState extends State<DetailsView> {
                         style: styleName,
                       ),
                       Text(
-                        Strings.stringPokedex + widget.pokedex,
+                        Strings.pokedex + widget.pokedex,
                         style: stylePokedex,
                       )
                     ],
@@ -108,35 +108,35 @@ class _DetailsViewState extends State<DetailsView> {
               const SizedBox(height: Dimens.sizedBoxLarge),
               Row(
                 children: [
-                  Text(Strings.stringType1, style: styleIntro),
+                  Text(Strings.type1, style: styleIntro),
                   Text(widget.type1, style: styleDescription),
                   const SizedBox(width: Dimens.sizedBoxLarge),
-                  Text(Strings.stringType2, style: styleIntro),
+                  Text(Strings.type2, style: styleIntro),
                   Text(widget.type2, style: styleDescription)
                 ],
               ),
               const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
-                  Text(Strings.stringHeight, style: styleIntro),
+                  Text(Strings.height, style: styleIntro),
                   Text(
                       widget.height.toString() +
-                          Strings.stringHeightMeasurementUnit,
+                          Strings.heightMeasurementUnit,
                       style: styleDescription),
                 ],
               ),
               const SizedBox(height: Dimens.sizedBoxSmall),
               Row(
                 children: [
-                  Text(Strings.stringWeight, style: styleIntro),
+                  Text(Strings.weight, style: styleIntro),
                   Text(
                       widget.weight.toString() +
-                          Strings.stringWeightMeasurementUnit,
+                          Strings.weightMeasurementUnit,
                       style: styleDescription)
                 ],
               ),
               const SizedBox(height: Dimens.sizedBoxLarge),
-              Text(Strings.stringDescription, style: styleIntro),
+              Text(Strings.description, style: styleIntro),
               Text(
                 widget.description,
                 style: styleDescription,
@@ -145,7 +145,7 @@ class _DetailsViewState extends State<DetailsView> {
               const SizedBox(height: Dimens.sizedBoxLarge),
               Align(
                   alignment: Alignment.center,
-                  child: Text(Strings.stringShiny, style: styleIntro)),
+                  child: Text(Strings.shiny, style: styleIntro)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
