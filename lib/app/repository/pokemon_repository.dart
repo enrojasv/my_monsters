@@ -5,6 +5,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/pokemon_model.dart';
 
 class PokemonRepository {
+  Future<bool> addFavorite(PokemonModel pokemonModel) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonFavorites = prefs.getStringList('favorites') ?? [];
+    jsonFavorites.add(jsonEncode(pokemonModel.toJson()));
+    return prefs.setStringList('favorites', jsonFavorites);
+  }
+
+  Future<List<PokemonModel>> getFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonFavorites = prefs.getStringList('favorites') ?? [];
+    return jsonFavorites
+        .map(
+            (jsonFavorites) => PokemonModel.fromJson(jsonDecode(jsonFavorites)))
+        .toList();
+  }
+
+  Future<bool> saveFavorites(List<PokemonModel> favorites) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonFavorites = favorites.map((e) => jsonEncode(e.toJson())).toList();
+    return prefs.setStringList('favorites', jsonFavorites);
+  }
+
   List<PokemonModel> getMockData() {
     final pokemonList = <PokemonModel>[
       PokemonModel.initData(
@@ -387,32 +409,5 @@ class PokemonRepository {
       ),
     ];
     return pokemonList;
-  }
-
-  List<PokemonModel> getFavoritesPokemon() {
-    final pokemonFavoritesList = <PokemonModel>[];
-    return pokemonFavoritesList;
-  }
-
-  Future<bool> addFavorite(PokemonModel pokemonModel) async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonFavorites = prefs.getStringList('favorites') ?? [];
-    jsonFavorites.add(jsonEncode(pokemonModel.toJson()));
-    return prefs.setStringList('favorites', jsonFavorites);
-  }
-
-  Future<List<PokemonModel>> getFavorites() async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonFavorites = prefs.getStringList('favorites') ?? [];
-    return jsonFavorites
-        .map(
-            (jsonFavorites) => PokemonModel.fromJson(jsonDecode(jsonFavorites)))
-        .toList();
-  }
-
-  Future<bool> saveFavorites(List<PokemonModel> favorites) async {
-    final prefs = await SharedPreferences.getInstance();
-    final jsonFavorites = favorites.map((e) => jsonEncode(e.toJson())).toList();
-    return prefs.setStringList('favorites', jsonFavorites);
   }
 }

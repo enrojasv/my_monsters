@@ -39,7 +39,7 @@ class DetailsView extends StatefulWidget {
 
 class _DetailsViewState extends State<DetailsView> {
   final PokemonRepository pokemonRepository = PokemonRepository();
-  final bool favoriteShPr = false;
+  final bool favoriteIcon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _DetailsViewState extends State<DetailsView> {
             pokemonRepository.addFavorite(pokemonModel);
           });
         },
-        child: Icon(favoriteShPr ? iconFav : iconNoFav),
+        child: Icon(favoriteIcon ? iconFav : iconNoFav),
       ),
       body: SafeArea(
         child: Padding(
