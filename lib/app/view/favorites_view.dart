@@ -14,17 +14,7 @@ class FavoritesView extends StatefulWidget {
 }
 
 class _FavoritesViewState extends State<FavoritesView> {
-  late List<PokemonModel> _allPokemon = [];
-  List<PokemonModel> _favoritePokemon = [];
-
-  @override
-  void initState() {
-    var pokemonRepository = PokemonRepository();
-    _allPokemon = pokemonRepository.getMockData();
-    _favoritePokemon =
-        _allPokemon.where((element) => element.favorite == true).toList();
-    super.initState();
-  }
+  final PokemonRepository pokemonRepository = PokemonRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +32,33 @@ class _FavoritesViewState extends State<FavoritesView> {
           Text(Strings.stringMyFavorites, style: styleTitle),
           const SizedBox(height: Dimens.sizedBoxLarge),
           Expanded(
-              child: ListView.separated(
-            itemBuilder: (_, index) {
-              var pokemonModel = _favoritePokemon[index];
+            child: FutureBuilder<List<PokemonModel>>(
+              future: pokemonRepository.getFavorites(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Center(
+                    child: Text(Strings.stringNoFavorites),
+                  );
+                }
+                return ListView.separated(
+                  itemBuilder: (_, index) {
+                    var pokemonModel = snapshot.data![index];
 
-              return PokemonPreviewItem(pokemonModel: pokemonModel);
-            },
-            separatorBuilder: (_, __) => const Divider(
-                indent: Dimens.dividerIntent, endIndent: Dimens.dividerIntent),
-            itemCount: _favoritePokemon.length,
-          )),
+                    return PokemonPreviewItem(pokemonModel: pokemonModel);
+                  },
+                  separatorBuilder: (_, __) => const Divider(
+                      indent: Dimens.dividerIntent,
+                      endIndent: Dimens.dividerIntent),
+                  itemCount: snapshot.data!.length,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );

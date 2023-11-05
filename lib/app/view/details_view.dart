@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_monsters/app/model/pokemon_model.dart';
+import 'package:my_monsters/app/repository/pokemon_repository.dart';
 
 import '../constants/dimens.dart';
 import '../constants/strings.dart';
@@ -17,7 +18,6 @@ class DetailsView extends StatefulWidget {
   String description = "";
   int height = 0;
   int weight = 0;
-  bool favorite = false;
 
   DetailsView(
       {super.key,
@@ -31,30 +31,15 @@ class DetailsView extends StatefulWidget {
       required this.type2,
       required this.description,
       required this.height,
-      required this.weight,
-      required this.favorite});
+      required this.weight});
 
   @override
   State<DetailsView> createState() => _DetailsViewState();
 }
 
 class _DetailsViewState extends State<DetailsView> {
-  bool favoriteShPr = false;
-
-  Future<void> _loadPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      favoriteShPr = (prefs.getBool('favorite') ?? false);
-    });
-  }
-
-  Future<void> _toggleFavorite() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      favoriteShPr = (prefs.getBool('favorite') ?? false);
-      prefs.setBool('favorite', !favoriteShPr);
-    });
-  }
+  final PokemonRepository pokemonRepository = PokemonRepository();
+  final bool favoriteShPr = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,22 +54,26 @@ class _DetailsViewState extends State<DetailsView> {
     IconData iconFav = Icons.favorite_rounded;
     IconData iconNoFav = Icons.favorite_outline_rounded;
 
+    PokemonModel pokemonModel = PokemonModel.initData(
+      name: widget.name,
+      pokedex: widget.pokedex,
+      imageFront: widget.imageFront,
+      imageBack: widget.imageBack,
+      imageFrontShiny: widget.imageFrontShiny,
+      imageBackShiny: widget.imageBackShiny,
+      type1: widget.type1,
+      type2: widget.type2,
+      description: widget.description,
+      height: widget.height,
+      weight: widget.weight,
+    );
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (favoriteShPr == true) {
-            setState(() {
-              _toggleFavorite();
-              _loadPreferences();
-              widget.favorite = false;
-            });
-          } else {
-            setState(() {
-              _toggleFavorite();
-              _loadPreferences();
-              widget.favorite = true;
-            });
-          }
+          setState(() {
+            pokemonRepository.addFavorite(pokemonModel);
+          });
         },
         child: Icon(favoriteShPr ? iconFav : iconNoFav),
       ),
@@ -162,20 +151,6 @@ class _DetailsViewState extends State<DetailsView> {
                 children: [
                   CachedNetworkImage(imageUrl: widget.imageBackShiny),
                   CachedNetworkImage(imageUrl: widget.imageFrontShiny),
-                ],
-              ),
-              const SizedBox(height: Dimens.sizedBoxSmall),
-              Row(
-                children: [
-                  Text("Favorite repository: ", style: styleIntro),
-                  Text(widget.favorite.toString(), style: styleDescription)
-                ],
-              ),
-              const SizedBox(height: Dimens.sizedBoxSmall),
-              Row(
-                children: [
-                  Text("Favorite preferences: ", style: styleIntro),
-                  Text(favoriteShPr.toString(), style: styleDescription)
                 ],
               ),
             ],

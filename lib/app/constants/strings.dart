@@ -8,6 +8,7 @@ class Strings {
   static const String stringHintPokemon = "Who's that Pokémon?";
   static const String stringHintSearch = "Search by name";
   static const String stringMyFavorites = "My Favorites";
+  static const String stringNoFavorites = "No favorites yet";
   static const String stringNoWidgetFor = "no widget for ";
   static const String stringPokedex = "#";
   static const String stringSearch = "Search";

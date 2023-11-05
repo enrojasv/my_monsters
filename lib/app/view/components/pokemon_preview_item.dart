@@ -35,7 +35,6 @@ class PokemonPreviewItem extends StatelessWidget {
                     description: pokemonModel.description,
                     height: pokemonModel.height,
                     weight: pokemonModel.weight,
-                    favorite: pokemonModel.favorite,
                   )),
         );
       },
